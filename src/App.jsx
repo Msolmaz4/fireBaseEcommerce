@@ -1,12 +1,30 @@
-import { useState } from "react"
+import { BrowserRouter, Route,Routes } from "react-router-dom"
+
+
+
+import {Header,Footer} from "./components"
+import {Home,Contact} from "./pages"
 
 
 function App() {
- const [first,setFirst] = useState("rty")
+
 
   return (
     <>
-    dererere
+ <BrowserRouter>
+  <Header/>
+  <Routes>
+    <Route path="/" element={<Home/>}/>
+    <Route path="/contact" element={<Contact/>}/>
+    <Route path="/" element={<Home/>}/>
+  </Routes>
+
+
+
+
+
+  <Footer/>
+ </BrowserRouter>
     </>
   )
 }
