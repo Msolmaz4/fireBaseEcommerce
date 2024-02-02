@@ -4,20 +4,18 @@
     top: 0;
     transition: all 0.5s;
     z-index: 9;
-    border: 2px solid red;
+
   }
   
   header {
     width: 100%;
-    background-color:var(--dark-blue);
-    //background-color:black;
+   background-color:var(--dark-blue);
+//background-color:white;
     color: #fff;
-    display: flex;
-    justify-content: space-evenly;
-    border: 2px soli red;
+ 
    
   
-    .header {
+    .header1 {
       width: 100%;
       height: 8rem;
       max-width: 1000px;
@@ -27,7 +25,7 @@
       justify-content: space-between;
       align-items: center;
       position: relative;
-      border:2px solid red;
+     // border:2px solid red;
     }
   
     .logo a h2 {
@@ -40,7 +38,7 @@
     }
   
     nav {
-      width: 60%;
+      width: 75%;
       display: flex;
       justify-content: space-between;
       ul {
@@ -69,7 +67,7 @@
   
       .cart a {
         display: flex;
-        color: #fff;
+        color:rgb(171, 23, 23);
         position: relative;
         &:hover {
           color: orangered;
@@ -94,8 +92,9 @@
       }
   
       .links a {
+    
         margin: 0 5px;
-        color: #fff;
+        color:white;
         &:hover {
           color: orangered;
         }
@@ -109,7 +108,7 @@
       cursor: pointer;
       display: none;
     }
-  
+    
     @media screen and (max-width: 800px) {
       nav {
         display: block;
@@ -176,12 +175,14 @@
           }
   
           .links {
-            display: block;
+            display: block; color: #fff;
+            border:2px solid white;
             a {
               display: block;
               margin: 0;
               padding: 5px 0;
               border-bottom: 1px solid #333;
+             
             }
           }
         }
