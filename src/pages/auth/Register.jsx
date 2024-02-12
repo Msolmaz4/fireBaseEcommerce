@@ -39,7 +39,8 @@ toast.error("password do not match")
   .catch((error) => {
  
     const errorMessage = error.message;
-    console.log(errorMessage)
+    toast.error(errorMessage)
+    setLoading(false)
 
   });
 }

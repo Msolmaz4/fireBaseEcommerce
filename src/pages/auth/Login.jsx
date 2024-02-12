@@ -1,8 +1,41 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import styles from "./auth.module.scss";
 import loginImg from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { auth } from "../../firebase/config";
 const Login = () => {
+  const [inp, setInp] = useState({
+    email: "",
+    password: "",
+  });
+  const navi = useNavigate()
+
+  const derleme = (e) => {
+    setInp({ ...inp, [e.target.name]: e.target.value });
+  };
+
+  const dert = (e) => {
+    e.preventDefault();
+    console.log(inp);
+    signInWithEmailAndPassword(auth, inp.email, inp.password)
+  .then((userCredential) => {
+
+    const user = userCredential.user;
+console.log(user)
+toast.success("login success")
+ navi("/")
+  })
+  .catch((error) => {
+  
+    const errorMessage = error.message;
+    toast.error(errorMessage)
+  });
+  };
+
   return (
     <section className={`container ${styles.auth}`}>
       <div className={styles.img}>
@@ -10,10 +43,26 @@ const Login = () => {
       </div>
       <div className={styles.form}>
         <h2>Login</h2>
-        <form>
-          <input type="text" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <button className="--btn --btn-primary --btn-block">Login</button>
+        <form onSubmit={dert}>
+          <input
+            type="text"
+            placeholder="Email"
+            required
+            name="email"
+            value={inp.email}
+            onChange={derleme}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            name="password"
+            value={inp.password}
+            onChange={derleme}
+          />
+          <button className="--btn --btn-primary --btn-block" onClick={dert}>
+            Login
+          </button>
           <div className={styles.links}>
             <Link to="/reset">Reset Password</Link>
           </div>
