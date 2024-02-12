@@ -24,6 +24,7 @@ const cart = (
   </span>
 );
 const Header = () => {
+  
   const [showMenu, setShowMenu] = useState(false);
 
   const toogleMenu = () => {
