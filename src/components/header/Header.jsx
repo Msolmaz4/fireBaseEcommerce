@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FcShop } from "react-icons/fc";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { useState } from "react";
@@ -29,7 +29,7 @@ const cart = (
 );
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
-
+  const navi = useNavigate()
   const toogleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -41,6 +41,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         toast.success("sucess logout");
+        navi("/")
       })
       .catch((error) => {
         toast.error(error);

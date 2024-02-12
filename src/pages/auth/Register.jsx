@@ -24,7 +24,7 @@ const derleme =(e)=>{
   e.preventDefault()
   console.log(inp)
   if(inp.password !== inp.cpassword) {
-toast.error("password do not match")
+  toast.error("password do not match")
   }
   setLoading(true)
   createUserWithEmailAndPassword(auth, inp.email, inp.password)
@@ -49,7 +49,6 @@ toast.error("password do not match")
     {loading && <Loader/>}
     <section className={`container ${styles.auth}`}>
     <Card> 
-   
     <div className={styles.form}>
       <h2>Register</h2>
       <form onSubmit={derleme}>
@@ -57,10 +56,7 @@ toast.error("password do not match")
         <input type="password" placeholder="Password" required value={inp.password} onChange={handle}  name="password"  />
         <input type="password" placeholder="Confirm Password" required value={inp.cpassword} name="cpassword"  onChange={handle} />
         <button className="--btn --btn-primary --btn-block" onClick={derleme}>Register</button>
-      
-
       </form>
-    
       <span className={styles.register}>
         <p>Already an account?</p>
         <Link to="/login"> Login</Link>
