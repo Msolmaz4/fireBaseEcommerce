@@ -2,9 +2,9 @@ import styles from "./Header.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FcShop } from "react-icons/fc";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
-import { signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { FaTimes, FaUserCircle } from "react-icons/fa";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 
@@ -29,6 +29,8 @@ const cart = (
 );
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [display, setDisplay] = useState("");
+
   const navi = useNavigate()
   const toogleMenu = () => {
     setShowMenu(!showMenu);
@@ -37,6 +39,25 @@ const Header = () => {
   const hideMenu = () => {
     setShowMenu(false);
   };
+
+useEffect(()=>{
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      //userkontrol edecgiy 
+      const uid = user.uid;
+      console.log(uid)
+      console.log(user)
+     setDisplay(user.displayName)
+     
+    } else {
+      // User is signed out
+      setDisplay("")
+    }
+  });
+},[])
+
   const logout = () => {
     signOut(auth)
       .then(() => {
@@ -103,6 +124,10 @@ const Header = () => {
               >
                 Login
               </NavLink>
+               <a href="#">
+                <FaUserCircle size={16}/>
+                Hi {display}
+              </a> 
               <NavLink
                 to="/register"
                 className={({ isActive }) =>
