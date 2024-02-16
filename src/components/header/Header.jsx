@@ -7,6 +7,8 @@ import { FaTimes, FaUserCircle } from "react-icons/fa";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../../redux/slice/authSlice";
 
 const logo = (
   <div className={styles.logo}>
@@ -30,6 +32,9 @@ const cart = (
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [display, setDisplay] = useState("");
+  const dispatch = useDispatch()
+  const {email,userName} = useSelector(state=>state.auth)
+  console.log(email,userName)
 
   const navi = useNavigate()
   const toogleMenu = () => {
@@ -46,17 +51,33 @@ useEffect(()=>{
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
       //userkontrol edecgiy 
-      const uid = user.uid;
-      console.log(uid)
-      console.log(user)
-     setDisplay(user.displayName)
+      //const uid = user.uid;
+      // console.log(uid)
+      // console.log(user)
+      if(user.displayName === null){
+        //const u1 = user.email.slice(0,-10)
+       // console.log(u1)
+       const u1 = user.email.substring(0,user.email.indexOf("@"))
+       const uName = u1.charAt(0).toUpperCase() + u1.slice(1)
+      // console.log(uName)
+      setDisplay(uName)
+      }else{
+        setDisplay(user.displayName)
+      }
+   
+     dispatch(SET_ACTIVE_USER({
+      email:user.email,
+      userName:user.displayName ? user.displayName : display,
+      userID:user.uid
+     }))
      
     } else {
       // User is signed out
       setDisplay("")
+      dispatch(REMOVE_ACTIVE_USER())
     }
   });
-},[])
+},[dispatch])
 
   const logout = () => {
     signOut(auth)
@@ -116,7 +137,8 @@ useEffect(()=>{
 
           <div className={styles.header_right} onClick={hideMenu}>
             <span className={styles.links}>
-              <NavLink
+            {
+              !email &&     <NavLink
                 to="/login"
                 className={({ isActive }) =>
                   isActive ? `${styles.active}` : ""
@@ -124,11 +146,17 @@ useEffect(()=>{
               >
                 Login
               </NavLink>
-               <a href="#">
+            }
+          
+              {
+                email &&  <a href="#">
                 <FaUserCircle size={16}/>
                 Hi {display}
-              </a> 
-              <NavLink
+              </a>
+              }
+               
+              {
+               !email &&  <NavLink
                 to="/register"
                 className={({ isActive }) =>
                   isActive ? `${styles.active}` : ""
@@ -136,6 +164,8 @@ useEffect(()=>{
               >
                 Register
               </NavLink>
+              }
+             
               <NavLink
                 to="/order-history"
                 className={({ isActive }) =>
@@ -144,9 +174,12 @@ useEffect(()=>{
               >
                 My Orders
               </NavLink>
-              <NavLink to="/" onClick={logout}>
+              {
+                email && <NavLink to="/" onClick={logout}>
                 Logout
               </NavLink>
+              }
+              
             </span>
             {cart}
           </div>
