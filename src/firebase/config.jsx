@@ -5,13 +5,15 @@ import {getFirestore} from "firebase/firestore"
 import {getStorage} from "firebase/storage"
 
  export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_APIKEY,
-  authDomain:import.meta.env.VITE_AUTHDOMAIN,
-  projectId: "debne-9a55d",
-  storageBucket: "debne-9a55d.appspot.com",
-  messagingSenderId: "927559597967",
-  appId: "1:927559597967:web:59b016dc1c1524c73855fa"
 
+
+
+  apiKey:import.meta.env.VITE_APIKEY,
+  authDomain:import.meta.env.VITE_AUTHDOMAIN, 
+  projectId: "dert-a43fa",
+  storageBucket: "dert-a43fa.appspot.com",
+  messagingSenderId: "1083126074893",
+  appId: "1:1083126074893:web:8e23009de4375dea8a0f44"
 
 
   // apiKey: "AIzaSyAT6q9WpjQrDUtDHvljfonynkBKvMzI0",
