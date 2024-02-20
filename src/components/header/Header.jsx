@@ -91,7 +91,7 @@ useEffect(()=>{
   };
 
   return (
-    <header>
+    <header className={styles.fixed}>
       <div className={styles.header1}>
         {logo}
         <nav

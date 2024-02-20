@@ -1,6 +1,7 @@
 
-import Product from "../../components/product/Product"
+
 import Slider from "../../components/slider/Slider"
+import Products from "../product/Products"
 
 
 
@@ -9,8 +10,8 @@ const Home = () => {
   return (
     <div>
       <Slider/>
-      <Product/>
-    
+  
+    <Products/>
 
     </div>
   )
