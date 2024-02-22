@@ -2,6 +2,7 @@ import { useState } from "react";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 
 import styles from "./Product.module.scss";
+import Cart from "../cart/Cart";
 const initialCategories = [
   { name: "All", isActive: true },
   { name: "Laptop", isActive: false },
@@ -16,7 +17,13 @@ const Products = () => {
   const { data } = useFetchCollection();
   const [categor, setCategor] = useState(initialCategories);
   console.log(data, "eeeeeeeeeeeeee");
+  const [int,setInt]= useState(1400)
+  const handleRangeChange = (e) => {
+    const newValue = parseInt(e.target.value, 10); // Değeri sayıya çevir
 
+    setInt(newValue);
+    console.log(newValue);
+  };
   return (
     <div>
       <div className={styles.product1}>
@@ -56,8 +63,21 @@ const Products = () => {
               <option>{er} </option>
             ))}
           </select>
+          <p>Price</p>
+          <p>${int}</p>
+          <input
+      type="range"
+      value={int}
+      onChange={handleRangeChange}
+      min={0} // Minimum değer
+      max={1400} // Maksimum değer
+      step={1} // Adım miktarı
+    />
         </div>
-        <div className={styles.product23}>4parca</div>
+        <div className={styles.product23}>
+
+          <Cart/>
+        </div>
       </div>
     </div>
   );

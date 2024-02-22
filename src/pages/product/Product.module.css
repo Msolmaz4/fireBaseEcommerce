@@ -1,0 +1,35 @@
+.product1 {
+  border: 2px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product1 .product11 {
+  width: 40%;
+  height: 80px;
+  border: 2px solid blueviolet;
+  gap: 5;
+}
+.product1 .product12 {
+  width: 60%;
+  height: 80px;
+  border: 2px solid blueviolet;
+  gap: 5;
+}
+
+.product2 {
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product2 .product22 {
+  width: 40%;
+  height: 500px;
+  border: 2px solid blueviolet;
+}
+.product2 .product23 {
+  width: 60%;
+  height: 500px;
+  border: 2px solid blueviolet;
+}/*# sourceMappingURL=Product.module.css.map */
