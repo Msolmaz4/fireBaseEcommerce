@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Header, Footer } from "./components";
+import { Header } from "./components";
 import { Home, Contact } from "./pages";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -21,8 +21,9 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
-        <Footer />
+  
       </BrowserRouter>
+        
       <ToastContainer />
     </>
   );

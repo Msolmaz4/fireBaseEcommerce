@@ -6,16 +6,22 @@ display: flex;
 justify-content: space-between;
 align-items: center;
   .product11{
-    width: 40%;
+    width: 12%;
     height: 80px;
     border: 2px solid blueviolet;
-    gap: 5;
+    justify-content: center;
   }
   .product12{
-    width: 60%;
+    width: 88%;
     height: 80px;
     border: 2px solid blueviolet;
-    gap: 5;
+   
+  }
+  .product13{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 
 }
@@ -25,13 +31,27 @@ align-items: center;
     justify-content: space-between;
     align-items: center;
   .product22{
-    width: 20%;
+    width: 12%;
     height: 500px;
     border: 2px solid blueviolet;
   }
   .product23{
-    width: 80%;
+    width: 88%;
     height: 500px;
     border: 2px solid blueviolet;
+    
+  }
+  .product24{
+    width: 100%;
+    height: 97%;
+    border: 2px solid red;
+    display: flex;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 15px;
+   
+ 
+    padding-top: 15px;
   }
 }

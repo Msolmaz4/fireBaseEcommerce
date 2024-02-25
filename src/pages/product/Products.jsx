@@ -15,40 +15,57 @@ const sele = [];
 
 const Products = () => {
   const { data } = useFetchCollection();
+  console.log(data,"product olan")
   const [categor, setCategor] = useState(initialCategories);
-  console.log(data, "eeeeeeeeeeeeee");
-  const [int,setInt]= useState(1400)
+
+  const [int, setInt] = useState(1400);
   const handleRangeChange = (e) => {
     const newValue = parseInt(e.target.value, 10); // Değeri sayıya çevir
 
     setInt(newValue);
-    console.log(newValue);
   };
   return (
     <div>
       <div className={styles.product1}>
         {" "}
-        <div className={styles.product11}> Categories</div>
-        <div className={styles.product12}>2parca</div>
+        <div className={styles.product11}>
+          <div></div> Categories
+        </div>
+        <div className={styles.product12}>
+          <div className={styles.product13}>
+            {" "}
+            <input
+              type="search"
+              placeholder="Search ...."
+              style={{
+                marginTop: "18px",
+                width: "350px",
+                height: "35px",
+                borderRadius: "5px",
+              }}
+            ></input>
+          </div>
+        </div>
       </div>
-      <div className={styles.product2}  >
+      <div className={styles.product2}>
         {" "}
         <div className={styles.product22}>
           {categor.map((ert, index) => (
-            <div 
+            <div
               key={index}
               onClick={() => {
                 const updatedCategories = categor.map((st) =>
-                st.name === ert.name ? { ...st, isActive: !st.isActive } : { ...st, isActive: false }
+                  st.name === ert.name
+                    ? { ...st, isActive: !st.isActive }
+                    : { ...st, isActive: false }
                 );
                 setCategor(updatedCategories);
                 console.log(updatedCategories);
               }}
             >
-            <div style={{color: ert.isActive == true ? "red" :"black"}}> 
-               {ert.name}
-            </div>
-           
+              <div style={{ color: ert.isActive == true ? "red" : "black" }}>
+                {ert.name}
+              </div>
             </div>
           ))}
 
@@ -66,17 +83,18 @@ const Products = () => {
           <p>Price</p>
           <p>${int}</p>
           <input
-      type="range"
-      value={int}
-      onChange={handleRangeChange}
-      min={0} // Minimum değer
-      max={1400} // Maksimum değer
-      step={1} // Adım miktarı
-    />
+            type="range"
+            value={int}
+            onChange={handleRangeChange}
+            min={0} // Minimum değer
+            max={1400} // Maksimum değer
+            step={1} // Adım miktarı
+          />
         </div>
         <div className={styles.product23}>
-
-          <Cart/>
+          <div className={styles.product24}>
+            <Cart  data= {data}/>
+          </div>
         </div>
       </div>
     </div>

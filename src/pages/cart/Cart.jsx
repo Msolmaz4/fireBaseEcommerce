@@ -1,15 +1,85 @@
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import "./Cart.module.scss"
-const Cart = () => {
+const LIMIT = 8;
+
+const Cart = ({ data }) => {
+  console.log(data, "cartolandaki");
+  const [postData, setPostData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [visible, setVisible] = useState(LIMIT);
+
+  useEffect(() => {
+    const vert = async () => {
+      try {
+        console.log(data, "veri");
+        const dert = await data?.slice(0, LIMIT);
+        console.log(dert, "dddddddddddd");
+        setPostData(dert);
+      } catch (error) {
+        console.error("Veri alınırken hata oluştu:", error);
+      }
+    };
+    vert();
+  }, [data]);
+
+  const fetchMoreData = () => {
+    const newLimit = visible + LIMIT;
+    console.log(newLimit);
+
+    if (postData.length < 40) {
+      try {
+        console.log(data, "fetch");
+        const addTo = data.slice(visible, newLimit);
+        console.log(addTo, "addto");
+
+        setTimeout(() => {
+          setPostData((prevData) => [...prevData, ...addTo]);
+        }, 2000);
+
+        setVisible(newLimit);
+      } catch (error) {
+        console.error("Yeni veri alınırken hata oluştu:", error);
+      }
+    } else {
+      setTimeout(() => {
+        setHasMore(false);
+      }, 2000);
+    }
+  };
+
+  console.log(postData, "posssssssssssssssssssssss");
+
   return (
-    <div className="card">
-    
-    <h1>Tailored Jeans</h1>
-    <p className="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    <p><button>Add to Cart</button></p>
-  </div>
-  )
-}
+    <div>
+      <InfiniteScroll
+        dataLength={postData.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Alles </b>
+          </p>
+        }
+      >
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {postData.map((item, index) => (
+            <div
+              style={{
+                height: "200px",
+                width: "300px",
+                border: "2px solid red",
+              }}
+              key={index}
+            >
+              div {item?.title} #{index}
+            </div>
+          ))}
+        </div>
+      </InfiniteScroll>
+    </div>
+  );
+};
 
-export default Cart
+export default Cart;
