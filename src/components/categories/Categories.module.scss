@@ -1,0 +1,28 @@
+
+
+.product1{
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+      .product11{
+        width: 12%;
+        height: 80px;
+        border: 2px solid blueviolet;
+        justify-content: center;
+      }
+      .product12{
+        width: 88%;
+        height: 80px;
+        border: 2px solid blueviolet;
+       
+      }
+      .product13{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+      }
+    
+    }
+    

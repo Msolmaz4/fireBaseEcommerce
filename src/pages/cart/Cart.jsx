@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const LIMIT = 8;
+const LIMIT = 12;
 
 const Cart = ({ data }) => {
   console.log(data, "cartolandaki");
@@ -62,12 +62,13 @@ const Cart = ({ data }) => {
             <b>Alles </b>
           </p>
         }
+        style={{ overflowX: 'hidden',overflowY:"hidden" }}
       >
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap:"12px", justifyContent:"center",overflowX: 'hidden',overflowY:"hidden" }}>
           {postData.map((item, index) => (
             <div
               style={{
-                height: "200px",
+                height: "250px",
                 width: "300px",
                 border: "2px solid red",
               }}
