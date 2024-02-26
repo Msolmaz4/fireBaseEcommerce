@@ -9,7 +9,7 @@ const Products = ({page,setPage}) => {
 
   return (
     <div>
-      <div className={styles.product2}>
+      <div >
         
           <div className={styles.product24}>
             <Cart data={data}  page={page} setPage= {setPage}/>

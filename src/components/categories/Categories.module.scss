@@ -1,20 +1,23 @@
 
 
 .product1{
-    border: 2px solid red;
+  
     display: flex;
     justify-content: space-between;
     align-items: center;
       .product11{
-        width: 12%;
+        width: 16%;
         height: 80px;
-        border: 2px solid blueviolet;
+       
         justify-content: center;
+        padding-top: 15px;
+        padding-left: 17px;
+        font-size: 25px;
       }
       .product12{
         width: 88%;
         height: 80px;
-        border: 2px solid blueviolet;
+       
        
       }
       .product13{

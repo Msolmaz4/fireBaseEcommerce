@@ -3,9 +3,9 @@ import styles from "./Categories.module.scss";
 const Categories = () => {
   return (
     <div> <div className={styles.product1}>
-    {" "}
+
     <div className={styles.product11}>
-      <div></div> Categories
+     Categories
     </div>
     <div className={styles.product12}>
       <div className={styles.product13}>

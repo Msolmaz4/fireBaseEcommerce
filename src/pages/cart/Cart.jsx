@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Footer } from "../../components";
+
 
 const LIMIT = 15;
 
@@ -72,13 +72,33 @@ console.log(page)
           {postData.map((item, index) => (
             <div
               style={{
-                height: "250px",
+                height: "270px",
                 width: "300px",
                 border: "2px solid red",
               }}
               key={index}
             >
-              div {item?.title} #{index}
+            <div style={{display:"flex",justifyContent:"center"}}>
+            <h4>{item?.title}  </h4>
+              
+               </div>
+               <div style={{display:"flex",justifyContent:"center"}}> 
+              {item?.images && item?.images[0] && (
+  <img src={item?.images[0]} style={{width:"160px",height:"160px"}}/>
+)}</div>
+           <div style={{marginTop:"2px",display:"flex",justifyContent:"center"}}>
+           {
+            item?.description && <p>{item?.description.slice(0,10)}...</p>
+           }
+           </div>
+           <div style={{display:"flex", justifyContent:"space-between", padding:"7px"}}>
+           {
+            item?.price && <p style={{ border:"2px solid blue" ,width:"60px", height:"40px",justifyContent:"center",alignItems:"center",textAlign:"center" ,background:"red", color:"white",borderRadius:"50%" ,paddingTop:"3px"}}>{item?.price}$</p>
+           }
+           <button style={{color:"white",background:"blue", width:"80px" ,height:"30px",borderRadius:"10px"}}>Add to</button>
+          </div>
+              
+               
             </div>
           ))}
         </div>

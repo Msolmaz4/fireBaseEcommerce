@@ -15,7 +15,7 @@ const Home = () => {
       <Slider />
       <Categories />
       <div style={{display:"flex"}}>
-        <Allfilter />
+        <Allfilter  />
         <Products page={page} setPage={setPage} />
       </div>
      {
