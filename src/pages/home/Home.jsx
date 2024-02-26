@@ -1,24 +1,29 @@
-import { Footer } from "../../components";
+
+
+import { useState } from "react";
 import Allfilter from "../../components/allfilter/Allfilter";
 import Categories from "../../components/categories/Categories";
 import Slider from "../../components/slider/Slider";
 import Products from "../product/Products";
+import { Footer } from "../../components";
+
 
 const Home = () => {
+  const [page,setPage]= useState()
   return (
     <div >
       <Slider />
-      <Categories/>
+      <Categories />
       <div style={{display:"flex"}}>
-      <Allfilter/>
-      <Products />
- </div>
- <div style={{ marginBottom: "auto" }}> 
-   <Footer/>
- </div>
-     
+        <Allfilter />
+        <Products page={page} setPage={setPage} />
+      </div>
+     {
+      !page && <Footer/> 
+     }
     </div>
   );
 };
+
 
 export default Home;

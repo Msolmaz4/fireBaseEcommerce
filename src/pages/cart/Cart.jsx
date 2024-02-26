@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Footer } from "../../components";
 
-const LIMIT = 12;
+const LIMIT = 15;
 
-const Cart = ({ data }) => {
+const Cart = ({ data,page ,setPage}) => {
   console.log(data, "cartolandaki");
   const [postData, setPostData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [visible, setVisible] = useState(LIMIT);
+ 
 
   useEffect(() => {
     const vert = async () => {
@@ -29,6 +31,7 @@ const Cart = ({ data }) => {
 
     if (postData.length < 40) {
       try {
+        setPage(true)
         console.log(data, "fetch");
         const addTo = data.slice(visible, newLimit);
         console.log(addTo, "addto");
@@ -42,6 +45,7 @@ const Cart = ({ data }) => {
         console.error("Yeni veri alınırken hata oluştu:", error);
       }
     } else {
+      setPage(false)
       setTimeout(() => {
         setHasMore(false);
       }, 2000);
@@ -49,18 +53,18 @@ const Cart = ({ data }) => {
   };
 
   console.log(postData, "posssssssssssssssssssssss");
-
+console.log(page)
   return (
-    <div>
+    <div style={{ marginBottom: "60px" }}>
       <InfiniteScroll
         dataLength={postData.length}
         next={fetchMoreData}
         hasMore={hasMore}
         loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
         endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Alles </b>
-          </p>
+         <div style={{marginTop:"15px"}}> 
+         <h2 style={{textAlign: 'center'}}>Alles</h2>
+          </div>
         }
         style={{ overflowX: 'hidden',overflowY:"hidden" }}
       >
@@ -79,6 +83,7 @@ const Cart = ({ data }) => {
           ))}
         </div>
       </InfiniteScroll>
+     
     </div>
   );
 };
