@@ -166,14 +166,14 @@ useEffect(()=>{
               </NavLink>
               }
              
-              <NavLink
+             { email && <NavLink
                 to="/order-history"
                 className={({ isActive }) =>
                   isActive ? `${styles.active}` : ""
                 }
               >
                 My Orders
-              </NavLink>
+              </NavLink>}
               {
                 email && <NavLink to="/" onClick={logout}>
                 Logout
@@ -181,7 +181,8 @@ useEffect(()=>{
               }
               
             </span>
-            {cart}
+            {email && {cart}}
+            
           </div>
         </nav>
         <div className={styles["menu-icon"]}>
