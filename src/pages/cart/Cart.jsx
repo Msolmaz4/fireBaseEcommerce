@@ -1,38 +1,50 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useSelector } from "react-redux";
 
 const LIMIT = 15;
 
 const Cart = ({ data, page, setPage }) => {
-  console.log(data, "cartolandaki");
+
   const [postData, setPostData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [visible, setVisible] = useState(LIMIT);
+  const {filteredProducts} = useSelector(state=>state.filter)
+  console.log(filteredProducts,"cart")
 
   useEffect(() => {
-    const vert = async () => {
+
+if(filteredProducts){
+  setPostData(filteredProducts)
+  setHasMore(false)
+
+}else{ 
+   const vert = async () => {
       try {
-        console.log(data, "veri");
         const dert = await data?.slice(0, LIMIT);
-        console.log(dert, "dddddddddddd");
         setPostData(dert);
       } catch (error) {
         console.error("Veri alınırken hata oluştu:", error);
       }
     };
     vert();
-  }, [data]);
+}
+
+
+   
+    
+  }, [data,filteredProducts]);
 
   const fetchMoreData = () => {
     const newLimit = visible + LIMIT;
-    console.log(newLimit);
+ 
 
     if (postData.length < 40) {
       try {
         setPage(true);
-        console.log(data, "fetch");
+        
         const addTo = data.slice(visible, newLimit);
-        console.log(addTo, "addto");
+      
 
         setTimeout(() => {
           setPostData((prevData) => [...prevData, ...addTo]);
@@ -50,8 +62,7 @@ const Cart = ({ data, page, setPage }) => {
     }
   };
 
-  console.log(postData, "posssssssssssssssssssssss");
-  console.log(page);
+
   return (
     <div style={{ marginBottom: "60px" }}>
       <InfiniteScroll

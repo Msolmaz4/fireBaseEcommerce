@@ -15,7 +15,7 @@ const useFetchCollection = () => {
     const veri = await axios.get("https://dummyjson.com/products");
     const products = veri.data?.products;
 
-    console.log(products);
+   
     setIsLoading(true);
     try {
       //burda datalari toplu olarak sirasiyla yuldim

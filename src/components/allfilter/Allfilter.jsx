@@ -1,6 +1,8 @@
 import { useState } from "react";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import styles from "./Allfilter.module.scss";
+import { useNavigate } from "react-router-dom";
+
 const initialCategories = [
   { name: "All", isActive: true },
   { name: "Laptop", isActive: false },
@@ -13,9 +15,12 @@ const sele = [];
 
 const Allfilter = () => {
   const { data } = useFetchCollection();
-  console.log(data, "product olan");
-  const [categor, setCategor] = useState(initialCategories);
 
+  const [categor, setCategor] = useState(initialCategories);
+  const navi = useNavigate()
+const det=()=>{
+
+  navi("/")}
   const [int, setInt] = useState(1400);
   const handleRangeChange = (e) => {
     const newValue = parseInt(e.target.value, 10); // Değeri sayıya çevir
@@ -32,7 +37,7 @@ const Allfilter = () => {
               key={index}
               onClick={() => {
                 const updatedCategories = categor.map((st) =>
-                  st.name === ert.name
+                  st.name === ert.name 
                     ? { ...st, isActive: !st.isActive }
                     : { ...st, isActive: false }
                 );
@@ -68,7 +73,7 @@ const Allfilter = () => {
             step={1} // Adım miktarı
           />
           <div>
-             <button style={{width:"90px" ,height:"30px",background:"red" ,color:"white", borderRadius:"5px"}}>clear</button>
+             <button style={{width:"90px" ,height:"30px",background:"red" ,color:"white", borderRadius:"5px"}} onClick={det}>clear</button>
           </div>
             
         </div>
