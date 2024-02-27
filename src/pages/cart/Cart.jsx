@@ -5,46 +5,37 @@ import { useSelector } from "react-redux";
 const LIMIT = 15;
 
 const Cart = ({ data, page, setPage }) => {
-
   const [postData, setPostData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [visible, setVisible] = useState(LIMIT);
-  const {filteredProducts} = useSelector(state=>state.filter)
-  console.log(filteredProducts,"cart")
+  const { filteredProducts } = useSelector((state) => state.filter);
+  console.log(filteredProducts, "cart");
 
   useEffect(() => {
-
-if(filteredProducts){
-  setPostData(filteredProducts)
-  setHasMore(false)
-
-}else{ 
-   const vert = async () => {
-      try {
-        const dert = await data?.slice(0, LIMIT);
-        setPostData(dert);
-      } catch (error) {
-        console.error("Veri alınırken hata oluştu:", error);
-      }
-    };
-    vert();
-}
-
-
-   
-    
-  }, [data,filteredProducts]);
+    if (filteredProducts) {
+      setPostData(filteredProducts);
+      setHasMore(false);
+    } else {
+      const vert = async () => {
+        try {
+          const dert = await data?.slice(0, LIMIT);
+          setPostData(dert);
+        } catch (error) {
+          console.error("Veri alınırken hata oluştu:", error);
+        }
+      };
+      vert();
+    }
+  }, [data, filteredProducts]);
 
   const fetchMoreData = () => {
     const newLimit = visible + LIMIT;
- 
 
     if (postData.length < 40) {
       try {
         setPage(true);
-        
+
         const addTo = data.slice(visible, newLimit);
-      
 
         setTimeout(() => {
           setPostData((prevData) => [...prevData, ...addTo]);
@@ -61,7 +52,6 @@ if(filteredProducts){
       }, 2000);
     }
   };
-
 
   return (
     <div style={{ marginBottom: "60px" }}>
