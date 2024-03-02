@@ -10,28 +10,52 @@ const filterSlice = createSlice({
   reducers: {
     FILTER_BY_SEARCH(state, action) {
       const { products, search } = action.payload;
-      console.log(search,products,"")
-      const tempProducts = products?.filter(
-        (product) =>
-          product?.title?.toLowerCase().includes(search.toLowerCase()) 
-         
+      console.log(search, products, "ddddddd");
+      const tempProducts = products?.filter((product) =>
+        product?.title?.toLowerCase().includes(search.toLowerCase())
       );
 
       state.filteredProducts = tempProducts;
     },
-   
+
+    
+
+  
+    
+
+
     FILTER_BY_CATEGORY(state, action) {
       const { products, category } = action.payload;
-      let tempProducts = [];
-      if (category === "All") {
-        tempProducts = products;
-      } else {
-        tempProducts = products.filter(
-          (product) => product.category === category
-        );
+      console.log(products, category, "by category");
+      const tempProducts = category;
+      console.log(tempProducts, "tepmmmmm");
+
+      for (let i = 0; i < 60; i++) {
+        if (tempProducts[i].isActive) {
+         // console.log(tempProducts[i].name.toLowerCase(), "kuckolma");
+          if (tempProducts[i].name == "All") return;
+          
+          products?.map((ert) => {
+           console.log(ert?.category);
+           
+            if (ert?.category == tempProducts[i].name.toLowerCase()){
+                 // state.filteredProducts.push({...ert}) 
+              return console.log(ert,"filterrrrrrrrrrrrr");
+            }
+          });
+        }
       }
-      state.filteredProducts = tempProducts;
-    },
+    }
+    ,
+    
+    
+    
+
+
+
+
+
+
     FILTER_BY_BRAND(state, action) {
       const { products, brand } = action.payload;
       let tempProducts = [];
@@ -59,7 +83,5 @@ export const {
   FILTER_BY_BRAND,
   FILTER_BY_PRICE,
 } = filterSlice.actions;
-
-export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 
 export default filterSlice.reducer;

@@ -59,7 +59,7 @@ const derleme =(e)=>{
       </form>
       <span className={styles.register}>
         <p>Already an account?</p>
-        <Link to="/login"> Login</Link>
+         <Link to="/login"> Login</Link> 
       </span>
     </div>
     </Card>

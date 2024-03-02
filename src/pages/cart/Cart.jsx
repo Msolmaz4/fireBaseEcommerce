@@ -15,7 +15,9 @@ const Cart = ({ data, page, setPage }) => {
     if (filteredProducts) {
       setPostData(filteredProducts);
       setHasMore(false);
-    } else {
+    } 
+    
+    else {
       const vert = async () => {
         try {
           const dert = await data?.slice(0, LIMIT);
@@ -35,7 +37,7 @@ const Cart = ({ data, page, setPage }) => {
       try {
         setPage(true);
 
-        const addTo = data.slice(visible, newLimit);
+        const addTo = data?.slice(visible, newLimit);
 
         setTimeout(() => {
           setPostData((prevData) => [...prevData, ...addTo]);

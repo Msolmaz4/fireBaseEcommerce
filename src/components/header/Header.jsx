@@ -62,7 +62,7 @@ useEffect(()=>{
       // console.log(uName)
       setDisplay(uName)
       }else{
-        setDisplay(user.displayName)
+       // setDisplay(user.displayName)
       }
    
      dispatch(SET_ACTIVE_USER({
@@ -181,7 +181,17 @@ useEffect(()=>{
               }
               
             </span>
-            {email && {cart}}
+            {email && 
+            
+              <span className={styles.cart}>
+    <NavLink to="/cart">
+      Cart
+      <FcShop size={34} />
+      <p>0</p>
+    </NavLink>
+  </span>
+            
+            }
             
           </div>
         </nav>

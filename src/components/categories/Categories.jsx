@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Categories.module.scss";
 import { useDispatch, useSelector} from "react-redux";
-import { FILTER_BY_SEARCH } from "../../redux/slice/filterSlice";
+import { FILTER_BY_CATEGORY, FILTER_BY_SEARCH } from "../../redux/slice/filterSlice";
 
 
 
@@ -13,6 +13,8 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(FILTER_BY_SEARCH({ products: products, search: value }));
+   
+
   }, [value, dispatch, products]);
 
   return (
