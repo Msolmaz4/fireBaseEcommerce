@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LIMIT = 15;
 
@@ -10,6 +11,7 @@ const Cart = ({ data, page, setPage }) => {
   const [visible, setVisible] = useState(LIMIT);
   const { filteredProducts } = useSelector((state) => state.filter);
   console.log(filteredProducts, "cart");
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (filteredProducts) {
@@ -80,7 +82,7 @@ const Cart = ({ data, page, setPage }) => {
           }}
         >
           {postData.map((item, index) => (
-            <div
+            <div  onClick={()=>navigate(`/detail/${item?.id}`)}
               style={{
                 height: "270px",
                 width: "300px",

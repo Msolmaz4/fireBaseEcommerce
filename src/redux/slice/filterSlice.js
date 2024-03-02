@@ -30,17 +30,18 @@ const filterSlice = createSlice({
       const tempProducts = category;
       console.log(tempProducts, "tepmmmmm");
 
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i <tempProducts.length; i++) {
         if (tempProducts[i].isActive) {
          // console.log(tempProducts[i].name.toLowerCase(), "kuckolma");
           if (tempProducts[i].name == "All") return;
-          
+          state.filteredProducts = []
           products?.map((ert) => {
            console.log(ert?.category);
            
             if (ert?.category == tempProducts[i].name.toLowerCase()){
                  // state.filteredProducts.push({...ert}) 
-              return console.log(ert,"filterrrrrrrrrrrrr");
+                 console.log(ert,"filterrrrrrrrrrrrr")
+              return state.filteredProducts.push({...ert}) ;
             }
           });
         }

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import styles from "./Allfilter.module.scss";
-import { useNavigate } from "react-router-dom";
+
 
 const sele = [];
 
 const Allfilter = () => {
   const { data, categor, setCategor } = useFetchCollection();
 
-  const navi = useNavigate();
+  
   const det = () => {
-    navi("/");
+    location.reload();
   };
   const [int, setInt] = useState(1400);
   const handleRangeChange = (e) => {

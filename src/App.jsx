@@ -7,6 +7,7 @@ import Reset from "./pages/auth/Reset";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./pages/notFound/NotFound";
+import Detail from "./components/detail/Detail";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/detail/:id" element={<Detail />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
