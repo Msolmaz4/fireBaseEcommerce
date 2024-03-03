@@ -12,6 +12,8 @@ const Detail = () => {
   const navigate = useNavigate()
   const {userID} = useSelector(state=>state.auth)
   console.log(userID,"llllllllllllll")
+  const {baskets} = useSelector(state=>state.basket)
+  console.log(baskets,"basket")
  
   const ver = data?.filter((veri) => veri.id == id);
   console.log(ver)
@@ -22,6 +24,7 @@ const Detail = () => {
   const det = ()=>{
     if(userID){
         console.log("..............")
+
     }
     else{
       toast("login muss")
