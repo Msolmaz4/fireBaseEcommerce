@@ -39,8 +39,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const { email, userName } = useSelector((state) => state.auth);
   console.log(email, userName);
-  const {veri} = useFetchDocument()
- console.log(veri,"header")
+
+  const {dert} = useFetchDocument()
+ console.log(dert,"header")
 
 
   const navi = useNavigate();
@@ -98,7 +99,7 @@ const Header = () => {
         toast.error(error);
       });
   };
-
+ 
   return (
     <header className={styles.fixed}>
       <div className={styles.header1}>
@@ -196,7 +197,7 @@ const Header = () => {
                 <NavLink to="/order">
                   Cart
                   <FcShop size={34} />
-                  <p>{veri?.length}</p>
+                  <p>{dert}</p>
                 </NavLink>
               </span>
             )}

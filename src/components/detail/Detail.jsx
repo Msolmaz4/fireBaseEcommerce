@@ -28,6 +28,8 @@ const Detail = () => {
       
       console.log(id);
       getAdd({data:ver[0],email:email,id:id})
+      
+
  
     } else {
       toast("login muss");

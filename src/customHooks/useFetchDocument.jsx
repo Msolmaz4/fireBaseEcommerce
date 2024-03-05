@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useFetchDocument = () => {
-  const [veri, setVeri] = useState([]);
+  const [dert, setVeri] = useState();
   const { userID,email } = useSelector((state) => state.auth);
-  console.log(userID,"get kontrolda")
+
 
   const getStart = async ({ email }) => {
     console.log(email ,"getStart")
     if (email) {
        console.log("geldik ulannnnnnnnnnnnn")
        try {
-        await setDoc(doc(db, `${email}`, "dA"), {
-          name: "Los Angeles",
-          state: "CA",
-          country: "USA"
-        });
+        await setDoc(doc(db, `${email}` , "dA"), {});
+    
+      
+     
+    
         console.log("Document successfully written!");
       } catch (error) {
         console.error("Error writing document: ", error);
@@ -42,10 +42,13 @@ const useFetchDocument = () => {
     
   };
 
+
+
+
+
+
   const getAdd = async ({ id, email, data }) => {
-    console.log(data, "getADD");
-    console.log(userID, "getADD");
-    console.log(email, "getemail");
+ 
   
     try {
       const querySnapshot = await getDocs(collection(db, `${email}`));
@@ -53,23 +56,35 @@ const useFetchDocument = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      setVeri(fetchedData);
+ 
       console.log(fetchedData, "fetccccccccccccc");
   
        for (let ert of fetchedData) {
             if (ert.id != id) {
               await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
+            
             } else {
               await setDoc(doc(db, `${email}`, `${id}`), { ...ert, quantity: ert.quantity + 1 });
+            
               console.log("icerdevar ");
               break;  // id eşleştiğinde döngüyü sonlandırır
             }
           }
+          const collectionRef = collection(db, `${email}`);
+
+          getDocs(collectionRef).then((querySnapshot) => {
+            const documentCount = querySnapshot.size;
+           setVeri(documentCount)
+            console.log("Belge Sayısı:", documentCount);
+          }).catch((error) => {
+            console.error("Hata oluştu:", error);
+          });
+          location.reload();
     } catch (error) {
       console.error("Hata oluştu:", error);
     }
   };
-  
+ 
   // const getAdd = async ({ id, email, data }) => {
   //   // ...veri?.map içindeki async fonksiyonların sonuçlarını beklemek için bir Promise.all kullanabilirsiniz. Böylece tüm işlemler tamamlandığında devam edebilirsiniz:
   //   try {
@@ -89,12 +104,24 @@ const useFetchDocument = () => {
   const getMinus = () => {};
 
   const getSummer = () => {};
-useEffect(()=>{
-  getStart({email})
-},[userID,email])
- 
 
-  return { getStart, getMinus, getSummer, veri, setVeri, getAdd };
+ useEffect(()=>{
+  if(email|| userID){
+    const collectionRef = collection(db, `${email}`);
+
+  getDocs(collectionRef).then((querySnapshot) => {
+    const documentCount = querySnapshot.size;
+     console.log("Belge Sayısı:", documentCount);
+   setVeri(documentCount)
+   
+  }).catch((error) => {
+    console.error("Hata oluştu:", error);
+  });
+  }
+  
+ },[email,userID,dert])
+console.log(dert,"return omces'")
+  return { getStart, getMinus, getSummer, dert, setVeri, getAdd };
 };
 
 export default useFetchDocument;
