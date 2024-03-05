@@ -196,7 +196,7 @@ const Header = () => {
                 <NavLink to="/order">
                   Cart
                   <FcShop size={34} />
-                  <p>0</p>
+                  <p>{veri?.length}</p>
                 </NavLink>
               </span>
             )}

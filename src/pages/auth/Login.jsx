@@ -30,7 +30,7 @@ const Login = () => {
 
        
         toast.success("login success");
-         getStart({ email:user?.email,data:{} });
+         getStart({ email:user?.email });
         navi("/");
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         toast.success("succes Google");
-        getStart({ email:user?.email,data:"" });
+        getStart({ email:user?.email });
         navi("/");
       })
       .catch((error) => {

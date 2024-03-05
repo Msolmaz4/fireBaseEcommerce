@@ -5,14 +5,25 @@ import { useSelector } from "react-redux";
 
 const useFetchDocument = () => {
   const [veri, setVeri] = useState([]);
-  const { userID } = useSelector((state) => state.auth);
+  const { userID,email } = useSelector((state) => state.auth);
   console.log(userID,"get kontrolda")
 
-  const getStart = async ({ email,data }) => {
-    console.log(email,data ,"getStart")
+  const getStart = async ({ email }) => {
+    console.log(email ,"getStart")
     if (email) {
-
-        console.log("geldik ulannnnnnnnnnnnn")
+       console.log("geldik ulannnnnnnnnnnnn")
+       try {
+        await setDoc(doc(db, `${email}`, "dA"), {
+          name: "Los Angeles",
+          state: "CA",
+          country: "USA"
+        });
+        console.log("Document successfully written!");
+      } catch (error) {
+        console.error("Error writing document: ", error);
+      }
+      
+       
 
         
 
@@ -45,18 +56,15 @@ const useFetchDocument = () => {
       setVeri(fetchedData);
       console.log(fetchedData, "fetccccccccccccc");
   
-      fetchedData?.map(async (ert) => {
-        if (ert.id !== id) {
-          const donud = await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
-          return donud;
-        } else {
-
-          const donud = await setDoc(doc(db, `${email}`, `${id}`), { ...ert, quantity: ert.quantity + 1 });
-          return donud;
-          
-         
-        }
-      });
+       for (let ert of fetchedData) {
+            if (ert.id != id) {
+              await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
+            } else {
+              await setDoc(doc(db, `${email}`, `${id}`), { ...ert, quantity: ert.quantity + 1 });
+              console.log("icerdevar ");
+              break;  // id eşleştiğinde döngüyü sonlandırır
+            }
+          }
     } catch (error) {
       console.error("Hata oluştu:", error);
     }
@@ -81,7 +89,9 @@ const useFetchDocument = () => {
   const getMinus = () => {};
 
   const getSummer = () => {};
-
+useEffect(()=>{
+  getStart({email})
+},[userID,email])
  
 
   return { getStart, getMinus, getSummer, veri, setVeri, getAdd };
