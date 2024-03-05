@@ -9,11 +9,18 @@ const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
+    
+        BASKET_ADD :(state,action)=>{
+            state.baskets.push(action.payload);
+           }
+           
+
+    
    
   },
 });
 
-export const { } = basketSlice.actions;
+export const {BASKET_ADD } = basketSlice.actions;
 
 
 

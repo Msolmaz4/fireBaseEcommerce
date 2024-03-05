@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./pages/notFound/NotFound";
 import Detail from "./components/detail/Detail";
 import Buy from "./components/buy/Buy";
+import OrderHistory from "./pages/orderHistory/OrderHistory";
 
 function App() {
   return (
@@ -21,9 +22,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/order" element={<OrderHistory />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/buy" element={<Buy />} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

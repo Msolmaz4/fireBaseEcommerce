@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useFetchCollection from "../../customHooks/useFetchCollection";
-
+import styles from "./DeatailFoot.module.scss"
 
 const DetailFoot = ({categ}) => {
     const { data } = useFetchCollection();
@@ -16,10 +16,17 @@ const DetailFoot = ({categ}) => {
     <div style={{display:"flex", justifyContent:"space-between"}}>
 {
     detailFo?.slice(0,5).map((ert,index)=>(
-          <div key={index} style={{ textAlign: "center" , border:"2px solid black",marginLeft:"4px",borderRadius:"8px"}} onClick={()=>derleme(ert.id)}>
-        <img  src={ert.images[0]}
+          <div key={index} className={styles.card} onClick={()=>derleme(ert.id)}>
+          <div className={styles.image_box}> 
+           <img  src={ert.images[0]}
             alt={`Image ${index + 1}`}
-            style={{ maxWidth: "80%", height: "auto" ,gap:"20px" }} />
+            />
+          </div>
+          <div className={styles.content}>
+            <h2>{ert.title}</h2>
+            <p>{ert.description}</p>
+          </div>
+       
           
         </div>
     ))
@@ -27,5 +34,6 @@ const DetailFoot = ({categ}) => {
     </div>
   )
 }
+
 
 export default DetailFoot

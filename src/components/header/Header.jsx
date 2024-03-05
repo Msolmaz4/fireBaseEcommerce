@@ -8,7 +8,11 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../../redux/slice/authSlice";
+import {
+  REMOVE_ACTIVE_USER,
+  SET_ACTIVE_USER,
+} from "../../redux/slice/authSlice";
+import useFetchDocument from "../../customHooks/useFetchDocument";
 
 const logo = (
   <div className={styles.logo}>
@@ -32,11 +36,14 @@ const cart = (
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [display, setDisplay] = useState("");
-  const dispatch = useDispatch()
-  const {email,userName} = useSelector(state=>state.auth)
-  console.log(email,userName)
+  const dispatch = useDispatch();
+  const { email, userName } = useSelector((state) => state.auth);
+  console.log(email, userName);
+  const {veri} = useFetchDocument()
+ console.log(veri,"header")
 
-  const navi = useNavigate()
+
+  const navi = useNavigate();
   const toogleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -45,45 +52,47 @@ const Header = () => {
     setShowMenu(false);
   };
 
-useEffect(()=>{
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      //userkontrol edecgiy 
-      //const uid = user.uid;
-      // console.log(uid)
-      // console.log(user)
-      if(user.displayName === null){
-        //const u1 = user.email.slice(0,-10)
-       // console.log(u1)
-       const u1 = user.email.substring(0,user.email.indexOf("@"))
-       const uName = u1.charAt(0).toUpperCase() + u1.slice(1)
-      // console.log(uName)
-      setDisplay(uName)
-      }else{
-       // setDisplay(user.displayName)
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        //userkontrol edecgiy
+        //const uid = user.uid;
+        // console.log(uid)
+        // console.log(user)
+        if (user.displayName === null) {
+          //const u1 = user.email.slice(0,-10)
+          // console.log(u1)
+          const u1 = user.email.substring(0, user.email.indexOf("@"));
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+          // console.log(uName)
+          setDisplay(uName);
+        } else {
+          // setDisplay(user.displayName)
+        }
+
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName ? user.displayName : display,
+            userID: user.uid,
+          })
+
+        );
+      } else {
+        // User is signed out
+        setDisplay("");
+        dispatch(REMOVE_ACTIVE_USER());
       }
-   
-     dispatch(SET_ACTIVE_USER({
-      email:user.email,
-      userName:user.displayName ? user.displayName : display,
-      userID:user.uid
-     }))
-     
-    } else {
-      // User is signed out
-      setDisplay("")
-      dispatch(REMOVE_ACTIVE_USER())
-    }
-  });
-},[dispatch])
+    });
+  }, [dispatch]);
 
   const logout = () => {
     signOut(auth)
       .then(() => {
         toast.success("sucess logout");
-        navi("/")
+        navi("/");
       })
       .catch((error) => {
         toast.error(error);
@@ -137,62 +146,60 @@ useEffect(()=>{
 
           <div className={styles.header_right} onClick={hideMenu}>
             <span className={styles.links}>
-            {
-              !email &&     <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active}` : ""
-                }
-              >
-                Login
-              </NavLink>
-            }
-          
-              {
-                email &&  <a href="#">
-                <FaUserCircle size={16}/>
-                Hi {display}
-              </a>
-              }
-               
-              {
-               !email &&  <NavLink
-                to="/register"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active}` : ""
-                }
-              >
-                Register
-              </NavLink>
-              }
-             
-             { email && <NavLink
-                to="/order-history"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active}` : ""
-                }
-              >
-                My Orders
-              </NavLink>}
-              {
-                email && <NavLink to="/" onClick={logout}>
-                Logout
-              </NavLink>
-              }
-              
+              {!email && (
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active}` : ""
+                  }
+                >
+                  Login
+                </NavLink>
+              )}
+
+              {email && (
+                <a href="#">
+                  <FaUserCircle size={16} />
+                  Hi {display}
+                </a>
+              )}
+
+              {!email && (
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active}` : ""
+                  }
+                >
+                  Register
+                </NavLink>
+              )}
+
+              {email && (
+                <NavLink
+                  to="/order"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active}` : ""
+                  }
+                >
+                  My Orders
+                </NavLink>
+              )}
+              {email && (
+                <NavLink to="/" onClick={logout}>
+                  Logout
+                </NavLink>
+              )}
             </span>
-            {email && 
-            
+            {email && (
               <span className={styles.cart}>
-    <NavLink to="/cart">
-      Cart
-      <FcShop size={34} />
-      <p>0</p>
-    </NavLink>
-  </span>
-            
-            }
-            
+                <NavLink to="/order">
+                  Cart
+                  <FcShop size={34} />
+                  <p>0</p>
+                </NavLink>
+              </span>
+            )}
           </div>
         </nav>
         <div className={styles["menu-icon"]}>

@@ -1,32 +1,74 @@
-// import { doc, getDoc } from "firebase/firestore";
-// import { useEffect, useState } from "react";
-// import { toast } from "react-toastify";
-// import { db } from "../firebase/config";
+import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-// const useFetchDocument = (collectionName, documentID) => {
-//   const [document, setDocument] = useState(null);
+const useFetchDocument = () => {
+  const [veri, setVeri] = useState([]);
+  const { userID } = useSelector((state) => state.auth);
+  console.log(userID,"get kontrolda")
 
-//   const getDocument = async () => {
-//     const docRef = doc(db, collectionName, documentID);
-//     const docSnap = await getDoc(docRef);
+  const getStart = async ({ email,data }) => {
+    console.log(email,data ,"getStart")
+    if (email) {
 
-//     if (docSnap.exists()) {
-//        console.log("Document data:", docSnap.data());
-//       const obj = {
-//         id: documentID,
-//         ...docSnap.data(),
-//       };
-//       setDocument(obj);
-//     } else {
-//       toast.error("Document not found");
-//     }
-//   };
+        console.log("geldik ulannnnnnnnnnnnn")
 
-//   useEffect(() => {
-//     getDocument();
-//   }, []);
+        
 
-//   return { document };
-// };
+        // const userCollectionRef = collection(db, `${email}`,"eleme");
+        // const querySnapshot = await getDocs(userCollectionRef);
+        // const fetchedData = querySnapshot.docs.map((doc) => ({
+        //   id: doc.id,
+        //   ...doc.data(),
+        // }));
+        // setVeri(fetchedData);
+    
+        
+      }else{
+        console.error("Error fetching user data from Firestore:");
+      }
+    
+  };
 
-// export default useFetchDocument;
+  const getAdd = async ({ id, email, data }) => {
+    console.log(data, "getADD");
+    console.log(userID, "getADD");
+    console.log(email, "getemail");
+  
+    try {
+      const querySnapshot = await getDocs(collection(db, `${email}`));
+      const fetchedData = await querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setVeri(fetchedData);
+      console.log(fetchedData, "fetccccccccccccc");
+  
+      fetchedData?.map(async (ert) => {
+        if (ert.id !== id) {
+          const donud = await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
+          return donud;
+        } else {
+          console.log("object");
+        }
+      });
+    } catch (error) {
+      console.error("Hata oluştu:", error);
+    }
+  };
+  
+    
+
+  const getMinus = () => {};
+
+  const getSummer = () => {};
+
+ 
+
+  return { getStart, getMinus, getSummer, veri, setVeri, getAdd };
+};
+
+export default useFetchDocument;
+
+

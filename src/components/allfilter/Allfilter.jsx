@@ -49,8 +49,8 @@ const Allfilter = () => {
           ))}
           <select name="" id="" style={{ fontSize: "25px" }}>
             <option value="">all</option>
-            {sele?.map((er) => (
-              <option>{er} </option>
+            {sele?.map((er,index) => (
+              <option key={index}>{er} </option>
             ))}
           </select>
           <p style={{ fontSize: "25px" }}>Price</p>

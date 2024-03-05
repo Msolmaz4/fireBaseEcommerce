@@ -10,7 +10,7 @@ const Cart = ({ data, page, setPage }) => {
   const [hasMore, setHasMore] = useState(true);
   const [visible, setVisible] = useState(LIMIT);
   const { filteredProducts } = useSelector((state) => state.filter);
-  console.log(filteredProducts, "cart");
+  //console.log(filteredProducts, "cart");
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Cart = ({ data, page, setPage }) => {
           const dert = await data?.slice(0, LIMIT);
           setPostData(dert);
         } catch (error) {
-          console.error("Veri alınırken hata oluştu:", error);
+         // console.error("Veri alınırken hata oluştu:", error);
         }
       };
       vert();
@@ -47,7 +47,7 @@ const Cart = ({ data, page, setPage }) => {
 
         setVisible(newLimit);
       } catch (error) {
-        console.error("Yeni veri alınırken hata oluştu:", error);
+        //console.error("Yeni veri alınırken hata oluştu:", error);
       }
     } else {
       setPage(false);

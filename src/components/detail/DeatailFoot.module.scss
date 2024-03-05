@@ -1,0 +1,71 @@
+.card{
+    aspect-ratio: 1/0.7;
+    cursor: pointer;
+    width: "10px";
+    height: "100%";
+
+
+    .image_box{
+        width: "100%";
+        height: "100%";
+        border-radius:inherit;
+        border: 2px solid red;
+        img {
+            width: "1px";
+            height: "100%";
+            object-fit: cover;
+            object-position: 50% 90%;
+            border-radius: inherit;
+            transition: 0.5 ease-in-out;
+        }
+       
+    }
+
+    ::after{
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        border-radius: inherit;
+        opacity: 0;
+        transition: 0.4 ease-in-out;
+    }
+    :hover img{
+        filter: grayscale(1) brightness(0.4);
+    }
+    :hover::after{
+        opacity: 1;
+        inset: 20px;
+    }
+    .content{
+        width: "80%";
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+        h2,p{
+            opacity: 0;
+            transition: 0.4 0.2 ease;
+        }
+        h2{
+            margin-bottom: 12px;
+            scale: 0.7;
+        }
+        p{
+            font-size: 14px;
+            line-height: 1.5s;
+            color:#d1d1d1;
+            transform: translateY(50%);
+        }
+    }
+    :hover .content h2 {
+        scale: 1;
+        opacity: 1;
+
+    }
+    :hover .content p{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

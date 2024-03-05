@@ -54,7 +54,7 @@ const useFetchCollection = () => {
         )
       );
    
-      console.log(fetchedData, "data");//! setter henüz güncelleme yapmadığı için konsolda datayı göremeyiz. o nedenle değişkeni yazdırdık
+     // console.log(fetchedData, "data");//! setter henüz güncelleme yapmadığı için konsolda datayı göremeyiz. o nedenle değişkeni yazdırdık
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);

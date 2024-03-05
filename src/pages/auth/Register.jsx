@@ -34,7 +34,9 @@ const derleme =(e)=>{
     console.log(user)
    setLoading(false)
    toast.success("register")
+   
    navi("/login")
+   
   })
   .catch((error) => {
  

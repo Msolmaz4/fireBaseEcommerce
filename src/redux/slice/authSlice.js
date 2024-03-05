@@ -5,6 +5,7 @@ const initialState = {
     email:null,
     userName:null,
     userID:null,
+ 
 
 }
 
@@ -19,6 +20,7 @@ const authSlice = createSlice({
     state.email = email,
     state.userName=userName,
     state.userID=userID
+
     },
     REMOVE_ACTIVE_USER(state,action){
       state.isLoggedIn =false
