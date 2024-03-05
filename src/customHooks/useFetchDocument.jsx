@@ -1,12 +1,14 @@
 import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const useFetchDocument = () => {
   const [dert, setVeri] = useState();
   const { userID,email } = useSelector((state) => state.auth);
-
+  const { BASKET_ADD,baskets} = useSelector(state=>state.basket)
+ 
+  const dispatch = useDispatch()
 
   const getStart = async ({ email }) => {
     console.log(email ,"getStart")
@@ -14,8 +16,13 @@ const useFetchDocument = () => {
        console.log("geldik ulannnnnnnnnnnnn")
        try {
         await setDoc(doc(db, `${email}` , "dA"), {});
-    
-      
+        const querySnapshot = await getDocs(collection(db, `${email}`));
+        const fetchedData = await querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        dispatch(BASKET_ADD({ payload: fetchedData }))
+
      
     
         console.log("Document successfully written!");
@@ -49,20 +56,20 @@ const useFetchDocument = () => {
 
   const getAdd = async ({ id, email, data }) => {
  
-  
+   console.log(baskets,"basketsssssssssssssssss")
     try {
       const querySnapshot = await getDocs(collection(db, `${email}`));
       const fetchedData = await querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
- 
+      
       console.log(fetchedData, "fetccccccccccccc");
   
        for (let ert of fetchedData) {
             if (ert.id != id) {
               await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
-            
+             
             } else {
               await setDoc(doc(db, `${email}`, `${id}`), { ...ert, quantity: ert.quantity + 1 });
             
@@ -70,6 +77,7 @@ const useFetchDocument = () => {
               break;  // id eşleştiğinde döngüyü sonlandırır
             }
           }
+        
           const collectionRef = collection(db, `${email}`);
 
           getDocs(collectionRef).then((querySnapshot) => {
@@ -113,6 +121,7 @@ const useFetchDocument = () => {
     const documentCount = querySnapshot.size;
      console.log("Belge Sayısı:", documentCount);
    setVeri(documentCount)
+
    
   }).catch((error) => {
     console.error("Hata oluştu:", error);
