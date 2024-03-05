@@ -50,7 +50,11 @@ const useFetchDocument = () => {
           const donud = await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
           return donud;
         } else {
-          console.log("object");
+
+          const donud = await setDoc(doc(db, `${email}`, `${id}`), { ...ert, quantity: ert.quantity + 1 });
+          return donud;
+          
+         
         }
       });
     } catch (error) {
@@ -58,7 +62,21 @@ const useFetchDocument = () => {
     }
   };
   
-    
+  // const getAdd = async ({ id, email, data }) => {
+  //   // ...veri?.map içindeki async fonksiyonların sonuçlarını beklemek için bir Promise.all kullanabilirsiniz. Böylece tüm işlemler tamamlandığında devam edebilirsiniz:
+  //   try {
+  //     await Promise.all(veri?.map(async (ert) => {
+  //       if (ert.id !== id) {
+  //         const donud = await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
+  //         return donud;
+  //       } else {
+  //         console.log("object");
+  //       }
+  //     }));
+  //   } catch (error) {
+  //     console.error("Hata oluştu:", error);
+  //   }
+  // };
 
   const getMinus = () => {};
 
