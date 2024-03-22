@@ -22,12 +22,13 @@ const useFetchCollection = () => {
   
   const getCollection = async () => {
 
-   // const veri = await axios.get("https://dummyjson.com/products");
-   // const products = veri.data?.products;
+  //   const veri = await axios.get("https://dummyjson.com/products");
+  //  const products = veri.data?.products;
+  //  console.log(products,"prodddd")
 
     setIsLoading(true);
     try {
-      //burda datalari toplu olarak sirasiyla yuldim
+      // //burda datalari toplu olarak sirasiyla yuldim
       //    for (const product of products) {
       //     // Her ürünü ayrı bir belge olarak ekleyin
       //      await addDoc(collection(db, "products"), product);

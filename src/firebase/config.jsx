@@ -8,20 +8,15 @@ import {getStorage} from "firebase/storage"
 
 
 
-  apiKey:import.meta.env.VITE_APIKEY,
-  authDomain:import.meta.env.VITE_AUTHDOMAIN, 
-  projectId: "dert-a43fa",
-  storageBucket: "dert-a43fa.appspot.com",
-  messagingSenderId: "1083126074893",
-  appId: "1:1083126074893:web:8e23009de4375dea8a0f44"
+  apiKey: import.meta.env.VITE_APP,
+  authDomain: import.meta.env.VITE_DOMAIN,
+  projectId: "e-commerce-3400f",
+  storageBucket: "e-commerce-3400f.appspot.com",
+  messagingSenderId: "1082611441482",
+  appId: "1:1082611441482:web:5cdc80d73caaea2fbe6bb3",
+  measurementId: "G-QY723PZFLE"
 
 
-  // apiKey: "AIzaSyAT6q9WpjQrDUtDHvljfonynkBKvMzI0",
-  // authDomain: "eshop-ea8e7.firebaseapp.com",
-  // projectId: "eshop-ea8e7",
-  // storageBucket: "eshop-ea8e7.appspot.com",
-  // messagingSenderId: "146569443233",
-  // appId: "1:146569443233:web:46db000fc2c897f3b73de0",
 };
 
 
