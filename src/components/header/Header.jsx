@@ -37,12 +37,9 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [display, setDisplay] = useState("");
   const dispatch = useDispatch();
-  const { email, userName } = useSelector((state) => state.auth);
-  console.log(email, userName);
+  const { email } = useSelector((state) => state.auth);
 
-  const {dert} = useFetchDocument()
- console.log(dert,"header")
-
+  const { dert } = useFetchDocument();
 
   const navi = useNavigate();
   const toogleMenu = () => {
@@ -79,7 +76,6 @@ const Header = () => {
             userName: user.displayName ? user.displayName : display,
             userID: user.uid,
           })
-
         );
       } else {
         // User is signed out
@@ -99,7 +95,7 @@ const Header = () => {
         toast.error(error);
       });
   };
- 
+
   return (
     <header className={styles.fixed}>
       <div className={styles.header1}>
@@ -197,7 +193,7 @@ const Header = () => {
                 <NavLink to="/order">
                   Cart
                   <FcShop size={34} />
-                  <p>{dert}</p>
+                  <p> {dert} </p>
                 </NavLink>
               </span>
             )}

@@ -12,12 +12,12 @@ const Detail = () => {
   const { getAdd} = useFetchDocument();
   const navigate = useNavigate();
   const { userID ,email} = useSelector((state) => state.auth);
-  console.log(userID, "llllllllllllll");
+  console.log(userID,"userid")
   const { baskets } = useSelector((state) => state.basket);
   console.log(baskets, "basket");
 
   const ver = data?.filter((veri) => veri.id == id);
-  console.log(ver);
+  
   console.log(ver[0]?.category);
   const buy = () => {
     navigate("/buy");

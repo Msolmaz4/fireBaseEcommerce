@@ -2,7 +2,7 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "../firebase/config";
-import axios from "axios";
+
 import { useDispatch } from "react-redux";
 import { STORE_PRODUCTS } from "../redux/slice/productSlice";
 import { FILTER_BY_CATEGORY } from "../redux/slice/filterSlice";
@@ -36,20 +36,20 @@ const useFetchCollection = () => {
       //     }
       //burda dikkat et bir kere yukleyince kapat yoksa surekli yukler ve bu hataya sebep olabilir
       const querySnapshot = await getDocs(collection(db, "products"));
-      const fetchedData = await querySnapshot.docs.map((doc) => ({
+      const fetchedDat = await querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setData(fetchedData);//! setter asenkron yapıdadır hemen çalışmaz
+      setData(fetchedDat);//! setter asenkron yapıdadır hemen çalışmaz
       dispatch(
         STORE_PRODUCTS({
-          products: fetchedData,//! değişkeni aktardık
+          products: fetchedDat,//! değişkeni aktardık
         })
         ,
         dispatch(
           FILTER_BY_CATEGORY({
-            products: fetchedData,
+            products: fetchedDat,
             category:categor
           })
         )

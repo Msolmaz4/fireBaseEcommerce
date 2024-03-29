@@ -11,6 +11,8 @@ import useFetchDocument from "../../customHooks/useFetchDocument";
 
 const Login = () => {
   const { getStart } = useFetchDocument();
+  const {man} =useFetchDocument()
+
   const [inp, setInp] = useState({
     email: "",
     password: "",
@@ -31,6 +33,7 @@ const Login = () => {
        
         toast.success("login success");
          getStart({ email:user?.email });
+         man({ email:user?.email })
         navi("/");
       })
       .catch((error) => {
@@ -46,6 +49,7 @@ const Login = () => {
         console.log(user);
         toast.success("succes Google");
         getStart({ email:user?.email });
+        man({ email:user?.email })
         navi("/");
       })
       .catch((error) => {
