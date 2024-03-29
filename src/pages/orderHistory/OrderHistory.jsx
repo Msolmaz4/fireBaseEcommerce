@@ -11,9 +11,23 @@ const OrderHistory = () => {
  
 
   return (
-    <div style={{marginTop:"50px",background:"red", }}>
-    <p>ww</p>
-    OrderHistory</div>
+    <div style={{marginTop:"150px", }}>
+    <div style={{fontSize:"25px", display:"flex",justifyContent:"center"}}>My Order</div>
+ {
+  baskets?.map(item=>(
+    <div>
+    {item.title}
+  
+  <img src={item?.thumbnail}/>
+
+    
+    
+    </div>
+  ))
+ }
+
+
+    </div>
   )
 }
 

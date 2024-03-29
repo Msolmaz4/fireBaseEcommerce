@@ -17,7 +17,7 @@ const Detail = () => {
   console.log(baskets, "basket");
 
   const ver = data?.filter((veri) => veri.id == id);
-  
+  console.log(ver,"verdetails")
   console.log(ver[0]?.category);
   const buy = () => {
     navigate("/buy");
@@ -74,7 +74,7 @@ const Detail = () => {
                 alignItems: "center",
               }}
             >
-              <img src={ver[0]?.images} alt="" width="260px" height="150px" />
+              <img src={ver[0]?.images[0]} alt="" width="260px" height="150px" />
             </div>
           </div>
           <div>
