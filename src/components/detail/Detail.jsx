@@ -14,7 +14,7 @@ const Detail = () => {
   const { userID ,email} = useSelector((state) => state.auth);
   console.log(userID,"userid")
   const { baskets } = useSelector((state) => state.basket);
-  console.log(baskets, "basket");
+ console.log(baskets, "basket");
 
   const ver = data?.filter((veri) => veri.id == id);
   console.log(ver,"verdetails")
