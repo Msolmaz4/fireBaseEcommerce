@@ -9,34 +9,27 @@ import useFetchDocument from "../../customHooks/useFetchDocument";
 const Detail = () => {
   const { id } = useParams();
   const { data } = useFetchCollection();
-  const { getAdd} = useFetchDocument();
+  const { getAdd } = useFetchDocument();
   const navigate = useNavigate();
-  const { userID ,email} = useSelector((state) => state.auth);
-  console.log(userID,"userid")
+  const { userID, email } = useSelector((state) => state.auth);
+
   const { baskets } = useSelector((state) => state.basket);
- console.log(baskets, "basket");
+  console.log(baskets, "basket");
 
   const ver = data?.filter((veri) => veri.id == id);
-  console.log(ver,"verdetails")
+  console.log(ver, "verdetails");
   console.log(ver[0]?.category);
   const buy = () => {
     navigate("/buy");
   };
   const det = (id) => {
     if (userID) {
-
-      
       console.log(id);
-      getAdd({data:ver[0],email:email,id:id})
-      
-
- 
+      getAdd({ data: ver[0], email: email, id: id });
     } else {
       toast("login muss");
     }
   };
-
-
 
   return (
     <div
@@ -74,7 +67,12 @@ const Detail = () => {
                 alignItems: "center",
               }}
             >
-              <img src={ver[0]?.images[0]} alt="" width="260px" height="150px" />
+              <img
+                src={ver[0]?.images[0]}
+                alt=""
+                width="260px"
+                height="150px"
+              />
             </div>
           </div>
           <div>

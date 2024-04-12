@@ -2,7 +2,7 @@ import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import  {BASKET_ADD}  from "../redux/slice/basketSlice"
+import  {BASKET_START,BASKET_ADD}  from "../redux/slice/basketSlice"
 
 const useFetchDocument = () => {
   const [dert, setVeri] = useState();
@@ -23,7 +23,7 @@ const useFetchDocument = () => {
         }));
         console.log(fetchedData,"fetvgasdsf")
      
-         dispatch(BASKET_ADD({baskets: fetchedData }));
+         dispatch(BASKET_START({baskets: fetchedData }));
      
 
         console.log("Document successfully written!");
@@ -54,28 +54,40 @@ const useFetchDocument = () => {
       for (let ert of fetchedData) {
         if (ert.id != id) {
           await setDoc(doc(db, `${email}`, `${id}`), { ...data, quantity: 1 });
+        
         } else {
           await setDoc(doc(db, `${email}`, `${id}`), {
             ...ert,
             quantity: ert.quantity + 1,
           });
-
+        
           break; // id eşleştiğinde döngüyü sonlandırır
         }
       }
+     
+    
+      const querySnapsh = await getDocs(collection(db, `${email}`));
+      const fetchedDa = await querySnapsh.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+    //  console.log(fetchedDa,"getadd gelem")
+  dispatch(BASKET_ADD(fetchedDa))
+
+
 
       const collectionRef = collection(db, `${email}`);
 
       getDocs(collectionRef)
-        .then((querySnapshot) => {
-          const documentCount = querySnapshot.size;
+        .then((querySnapsh) => {
+          const documentCount = querySnapsh.size;
           setVeri(documentCount);
           console.log("Belge Sayısı:", documentCount);
         })
         .catch((error) => {
           console.error("Hata oluştu:", error);
         });
-      location.reload();
+     // location.reload();
     } catch (error) {
       console.error("Hata oluştu:", error);
     }
@@ -109,9 +121,11 @@ const useFetchDocument = () => {
 
   };
 
-  const getMinus = () => {};
+  const getMinus = ({id,email,data}) => {
+    console.log(email,id,data)
+  };
 
-  const getSummer = () => {};
+
 
   useEffect(() => {
     if (email || userID) {
@@ -129,7 +143,7 @@ const useFetchDocument = () => {
     }
   }, [email, userID, dert]);
 
-  return { getStart, getMinus, getSummer, dert, setVeri, getAdd, man };
+  return { getStart, getMinus, dert, setVeri, getAdd, man };
 };
 
 export default useFetchDocument;

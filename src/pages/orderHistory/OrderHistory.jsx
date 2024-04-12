@@ -8,8 +8,9 @@ const OrderHistory = () => {
   let basketsCopy = [...baskets];
   basketsCopy.pop();
  console.log(basketsCopy, "basketsCopy");
-  const {getAdd} = useFetchDocument()
+  const {getAdd,getMinus} = useFetchDocument()
   const { data } = useFetchCollection();
+  console.log(data,"orereee")
   const { email} = useSelector((state) => state.auth);
   const total = basketsCopy?.reduce((acc, item) => {
     return acc +Number(item.price) * Number(item.quantity);
@@ -37,7 +38,7 @@ const OrderHistory = () => {
           
           </div>
           <div style={{display:"flex" ,alignItems:"center" ,gap:"15px",marginLeft:"100px"}} >
-            <button style={{ height:"30px", width:"100px"}}>-</button>
+            <button style={{ height:"30px", width:"100px"}} onClick={()=>getMinus({id:item.id,email:email,data:data})}>-</button>
             <p style={{ height:"30px", width:"100px",alignItems:"center",justifyContent:"center",display:"flex"}}>{item.quantity}</p>
             <button onClick={()=>getAdd({id:item.id,email:email,data:data})} style={{height:"30px", width:"100px", border:"2px solid black",alignItems:"center",justifyContent:"center"}}>+</button>
             <button style={{height:"30px", width:"100px", border:"2px solid black"}}>delete</button>

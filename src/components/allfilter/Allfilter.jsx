@@ -10,7 +10,7 @@ const Allfilter = () => {
 
   
   const det = () => {
-    location.reload();
+    //location.reload();
   };
   const [int, setInt] = useState(1400);
   const handleRangeChange = (e) => {
@@ -33,7 +33,7 @@ const Allfilter = () => {
                     : { ...st, isActive: false }
                 );
                 setCategor(updatedCategories);
-                console.log(updatedCategories);
+             
               }}
             >
               <div style={{ color: ert.isActive == true ? "red" : "black" }}>
