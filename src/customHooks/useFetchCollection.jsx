@@ -59,6 +59,10 @@ const useFetchCollection = () => {
      }));
      console.log(fetchedDat)
 
+     
+// Bu kod, JavaScript'de bir nesne dizisini filtrelemek için kullanılan bir örnektir. self, burada fetchedDat dizisini temsil eder. filter fonksiyonu, her öğeyi geçerli dizide bir koşula göre kontrol eder ve koşulu sağlayanları yeni bir diziye ekler. Ancak, burada filter fonksiyonuna önce bir kontrol eklenmiş.
+
+// Bu kontrol self.findIndex fonksiyonunu kullanır. findIndex fonksiyonu, verilen bir koşulu sağlayan dizideki ilk öğenin dizinini döndürür. Bu durumda, her öğe için, dizide aynı başlıkla (.title === item.title) bir önceki öğenin dizinini bulmaya çalışır (index === ...). Bu, her öğenin birbirinden farklı olduğundan emin olur ve yalnızca benzersiz öğelerin yeniDert dizisine eklenmesini sağlar. Bu işlem sonucunda yeniDert dizisi, fetchedDat dizisindeki benzersiz öğeleri içerecektir.
      const newDert = fetchedDat?.filter((item, index, self) =>
      index === self.findIndex((t) => (
        t.title === item.title
