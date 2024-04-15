@@ -2,7 +2,7 @@ import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import  {BASKET_START,BASKET_ADD}  from "../redux/slice/basketSlice"
+import  {BASKET_START}  from "../redux/slice/basketSlice"
 
 const useFetchDocument = () => {
   const [dert, setVeri] = useState();
@@ -15,7 +15,7 @@ const useFetchDocument = () => {
   const getStart = async ({ email }) => {
     if (email) {
       try {
-        setDoc(doc(db, `${email}`, "dA"), {});
+        setDoc(doc(db, `${email}`, "dA"), {quantity:1,price:0});
         const querySnapshot = await getDocs(collection(db, `${email}`));
         const fetchedData = await querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -23,7 +23,7 @@ const useFetchDocument = () => {
         }));
         console.log(fetchedData,"fetvgasdsf")
      
-         dispatch(BASKET_START({baskets: fetchedData }));
+        dispatch(BASKET_START({baskets: fetchedData }));
      
 
         console.log("Document successfully written!");
@@ -66,21 +66,15 @@ const useFetchDocument = () => {
       }
      
     
-      const querySnapsh = await getDocs(collection(db, `${email}`));
-      const fetchedDa = await querySnapsh.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-    //  console.log(fetchedDa,"getadd gelem")
-  dispatch(BASKET_ADD(fetchedDa))
+  
 
 
 
       const collectionRef = collection(db, `${email}`);
 
       getDocs(collectionRef)
-        .then((querySnapsh) => {
-          const documentCount = querySnapsh.size;
+        .then((querySnapshot) => {
+          const documentCount = querySnapshot.size;
           setVeri(documentCount);
           console.log("Belge Sayısı:", documentCount);
         })

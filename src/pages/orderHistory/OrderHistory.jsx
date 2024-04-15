@@ -1,19 +1,18 @@
 import { useSelector } from "react-redux";
 import useFetchDocument from "../../customHooks/useFetchDocument";
-import useFetchCollection from "../../customHooks/useFetchCollection";
+
 
 const OrderHistory = () => {
   const { baskets } = useSelector((state) => state.basket);
-  //console.log(baskets, "basket");
-  let basketsCopy = [...baskets];
-  basketsCopy.pop();
- console.log(basketsCopy, "basketsCopy");
+  console.log(baskets, "basket");
+
   const {getAdd,getMinus} = useFetchDocument()
-  const { data } = useFetchCollection();
-  console.log(data,"orereee")
+
   const { email} = useSelector((state) => state.auth);
-  const total = basketsCopy?.reduce((acc, item) => {
-    return acc +Number(item.price) * Number(item.quantity);
+  const total = baskets?.reduce((acc, item) => {
+     let der=   acc +  item.price * item.quantity;
+    return der
+     
   }, 0);
 
 
@@ -25,7 +24,7 @@ const OrderHistory = () => {
         My Order
       </div>
       
-      {basketsCopy?.map((item,i) => (
+      {baskets?.map((item,i) => (
         <div key={i} style={{display:"flex", border:"2px solid red", width:"%100",marginBottom:"5px" ,borderRadius:"20px" }}>
         
         <div style={{display:"flex", width:"%100"}}> 
@@ -38,9 +37,9 @@ const OrderHistory = () => {
           
           </div>
           <div style={{display:"flex" ,alignItems:"center" ,gap:"15px",marginLeft:"100px"}} >
-            <button style={{ height:"30px", width:"100px"}} onClick={()=>getMinus({id:item.id,email:email,data:data})}>-</button>
+            <button style={{ height:"30px", width:"100px"}} onClick={()=>getMinus({id:item.id,email:email,data:item})}>-</button>
             <p style={{ height:"30px", width:"100px",alignItems:"center",justifyContent:"center",display:"flex"}}>{item.quantity}</p>
-            <button onClick={()=>getAdd({id:item.id,email:email,data:data})} style={{height:"30px", width:"100px", border:"2px solid black",alignItems:"center",justifyContent:"center"}}>+</button>
+            <button onClick={()=>getAdd({id:item.id,email:email,data:item})} style={{height:"30px", width:"100px", border:"2px solid black",alignItems:"center",justifyContent:"center"}}>+</button>
             <button style={{height:"30px", width:"100px", border:"2px solid black"}}>delete</button>
           </div>
         </div>
